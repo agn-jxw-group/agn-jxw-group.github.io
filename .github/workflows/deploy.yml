@@ -1,0 +1,29 @@
+name: Deploy GitHub Pages (review gate)
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    if: ${{ vars.ENABLE_PAGES_DEPLOY == 'true' }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          BASE_PATH: /agn-jxw-group/
+          SITE_URL: https://${{ github.repository_owner }}.github.io
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4

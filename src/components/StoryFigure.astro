@@ -1,0 +1,48 @@
+---
+import { withBase } from '../config/site';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  credit: string;
+  sourceUrl?: string;
+  size?: 'narrow' | 'standard' | 'wide';
+}
+
+const { src, alt, caption, credit, sourceUrl, size = 'standard' } = Astro.props;
+const required = { src, alt, caption, credit };
+
+for (const [name, value] of Object.entries(required)) {
+  if (typeof value !== 'string' || value.trim().length === 0) {
+    throw new Error(`StoryFigure requires a non-empty ${name} property.`);
+  }
+}
+if (!src.startsWith('/images/')) {
+  throw new Error(`StoryFigure src must begin with /images/: ${src}`);
+}
+if (!['narrow', 'standard', 'wide'].includes(size)) {
+  throw new Error(`StoryFigure size must be narrow, standard, or wide: ${size}`);
+}
+---
+<figure class:list={['story-figure', `story-figure--${size}`]}>
+  <img src={withBase(src)} alt={alt} loading="lazy" decoding="async" />
+  <figcaption>
+    <span class="story-figure__caption">{caption}</span>
+    <span class="story-figure__credit">
+      {sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">{credit}</a> : credit}
+    </span>
+  </figcaption>
+</figure>
+
+<style>
+  .story-figure{--figure-max:680px;width:min(100%,var(--figure-max));margin:2.2rem auto 2.6rem}
+  .story-figure--narrow{--figure-max:520px}.story-figure--wide{--figure-max:760px}
+  .story-figure img{display:block;width:auto;max-width:100%;height:auto;margin:0 auto}
+  .story-figure figcaption{margin:.75rem auto 0;max-width:680px;line-height:1.55}
+  .story-figure__caption{display:block;font-size:.9rem;color:var(--carbon)}
+  .story-figure__credit{display:block;margin-top:.3rem;font:400 .66rem/1.55 var(--mono);letter-spacing:.02em;color:var(--carbon-60)}
+  .story-figure__credit a{color:inherit;text-decoration-color:var(--carbon-30);text-underline-offset:.18em}
+  .story-figure__credit a:hover{color:var(--red)}
+  @media(max-width:600px){.story-figure{margin:1.75rem auto 2rem}.story-figure__caption{font-size:.84rem}}
+</style>

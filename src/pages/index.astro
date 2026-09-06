@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import NewsCard from '../components/NewsCard.astro';
+import { NAV, SITE, withBase } from '../config/site';
+import { getPublishedNews } from '../lib/news';
+
+const { pinned, recent } = await getPublishedNews();
+const leaders = [
+  { name: 'Jun-Xian Wang', id: 'wang-jun-xian' },
+  { name: 'Zhen-Yi Cai', id: 'cai-zhen-yi' },
+  { name: 'Teng Liu', id: 'liu-teng' },
+];
+---
+<BaseLayout darkHeader>
+  <section class="home-hero">
+    <picture class="hero-picture">
+      <source media="(max-width: 700px)" srcset={withBase('/images/hero/agn-hero-800.webp')} />
+      <img src={withBase('/images/hero/agn-hero.webp')} alt="Artist’s impression of a bright accretion disk and energetic jets around a supermassive black hole." fetchpriority="high" width="1600" height="900" />
+    </picture>
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <p class="eyebrow">{SITE.descriptor} · USTC</p>
+      <h1>{SITE.heroTitle}</h1>
+      <p>{SITE.heroSubtitle}</p>
+      <p class="hero-leadership">Led by {leaders.map((leader, index) => <><a href={withBase(`/team/#${leader.id}`)}>{leader.name}</a>{index < leaders.length - 1 && <span aria-hidden="true"> · </span>}</>)}</p>
+    </div>
+    <nav class="hero-portals" aria-label="Explore the group">
+      {NAV.map((item) => (
+        <a href={withBase(item.href)}>
+          <span class="portal-copy"><small>{item.kicker}</small><span class="portal-title"><strong>{item.label}</strong><span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></svg></span></span></span>
+        </a>
+      ))}
+    </nav>
+    <p class="hero-credit">Concept image generated for USTC Active Universe · scientific visualization</p>
+  </section>
+
+  <section class="section news-section" id="news">
+    <div class="section-inner">
+      <header class="news-heading"><div><p class="eyebrow">Latest from the group</p><h2>News</h2></div><ArrowLink href="/news/" label="More news" /></header>
+      <div class="news-layout">
+        <NewsCard entry={pinned} size="pinned" />
+        <div class="news-recent">{recent.map((entry) => <NewsCard entry={entry} size="recent" />)}</div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.home-hero{height:100svh;min-height:680px;position:relative;background:#000;color:#fff;display:flex;align-items:flex-start;overflow:hidden}.hero-picture{position:absolute;inset:0}.hero-picture img{width:100%;height:100%;object-fit:cover}.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.6) 48%,rgba(0,0,0,.08) 80%),linear-gradient(0deg,rgba(0,0,0,.9),transparent 58%)}.hero-copy{position:relative;z-index:2;padding:clamp(8rem,16vh,10rem) var(--pad) 0;max-width:900px}.hero-copy h1{color:#fff;margin:0 0 1rem;max-width:820px;font-size:clamp(3.3rem,6.1vw,5.7rem)}.hero-copy>p:not(.eyebrow):not(.hero-leadership){max-width:700px;font-size:clamp(1rem,1.5vw,1.2rem);line-height:1.5;color:#eee}.hero-leadership{font:400 .74rem/1.5 var(--mono);color:#cfcfcf;margin-top:1.2rem}.hero-leadership a{text-underline-offset:4px;text-decoration-color:#777}.hero-portals{position:absolute;z-index:3;left:var(--pad);right:var(--pad);bottom:2.2rem;border-top:1px solid #777;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(.8rem,2vw,2rem);padding-top:1rem}.hero-portals>a{display:block;text-decoration:none;min-width:0}.portal-copy{display:block}.hero-portals small{display:block;font:500 .61rem/1.25 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:#b9b9bb;margin-bottom:.3rem}.portal-title{display:flex;align-items:center;gap:.7rem;width:max-content;max-width:100%}.hero-portals strong{font:600 clamp(1.05rem,1.7vw,1.45rem)/1.1 var(--display);color:#fff}.hero-portals .arrow-icon{width:1.85rem;height:1.85rem;flex:0 0 auto}.hero-credit{position:absolute;z-index:2;top:7rem;right:var(--pad);writing-mode:vertical-rl;font:400 .57rem var(--mono);color:#aaa}.news-heading{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:clamp(2rem,3vw,3rem);border-bottom:1px solid var(--line);padding-bottom:1.5rem}.news-heading h2{margin:0}.news-heading .eyebrow{margin-bottom:.7rem}.news-layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:clamp(1rem,2vw,1.6rem);align-items:stretch}.news-recent{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(1rem,2vw,1.6rem)}
+@media(max-width:1050px){.hero-portals{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:1rem}.hero-copy{padding-top:8rem}.home-hero{min-height:760px}.news-layout{grid-template-columns:1fr}.news-recent{grid-template-rows:auto}}
+@media(max-width:700px){.home-hero{height:auto;min-height:100svh;display:block}.hero-shade{background:linear-gradient(0deg,rgba(0,0,0,.94),rgba(0,0,0,.18) 88%)}.hero-copy{padding:7.2rem var(--pad) 1.5rem}.hero-copy h1{font-size:clamp(2.9rem,13vw,4rem);max-width:360px}.hero-copy>p:not(.eyebrow):not(.hero-leadership){font-size:1rem}.hero-portals{position:relative;left:auto;right:auto;bottom:auto;margin:0 var(--pad);grid-template-columns:repeat(2,minmax(0,1fr));padding:1rem 0 4rem}.hero-portals>a{min-height:64px}.hero-portals>a:last-child{grid-column:1/-1}.hero-credit{position:absolute;top:auto;bottom:.8rem;left:var(--pad);right:auto;writing-mode:horizontal-tb}.news-heading{align-items:center}.news-recent{grid-template-columns:1fr}}
+</style>

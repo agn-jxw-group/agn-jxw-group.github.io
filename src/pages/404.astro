@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+---
+<BaseLayout title="Page not found">
+  <section class="not-found"><div><p class="eyebrow">404 · Signal lost</p><h1>This source is outside our field of view.</h1><p>The page may have moved, or the address may contain a typo.</p><ArrowLink href="/" label="Return home" /></div></section>
+</BaseLayout>
+<style>.not-found{min-height:70vh;background:#000;color:#fff;padding:clamp(5rem,10vw,10rem) var(--pad);display:grid;align-items:center}.not-found>div{max-width:var(--max);margin:auto;width:100%}.not-found h1{color:#fff;max-width:1100px}.not-found>div>p:not(.eyebrow){font-size:1.2rem;color:#bbb}.not-found .eyebrow{color:#aaa}</style>

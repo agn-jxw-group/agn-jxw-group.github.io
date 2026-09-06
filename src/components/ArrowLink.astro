@@ -1,0 +1,10 @@
+---
+import { withBase } from '../config/site';
+interface Props { href: string; label?: string; class?: string; external?: boolean }
+const { href, label = 'Explore', class: className = '', external = false } = Astro.props;
+const resolved = external || /^(https?:|mailto:)/.test(href) ? href : withBase(href);
+---
+<a class:list={['arrow-link', className]} href={resolved} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>
+  <span>{label}</span>
+  <span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></svg></span>
+</a>

@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArrowLink from '../../components/ArrowLink.astro';
+const categories = (await getCollection('researchCategories')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Research" description="Four public questions guide the USTC Active Universe research programme.">
+  <section class="page-hero"><div><p class="eyebrow">Research</p><h1>We study an active Universe.</h1><p class="lede">A supermassive black hole is smaller than a solar system, yet its light can outshine a galaxy. We use spectra, surveys and changing light to learn how that engine works—and what it changes.</p></div></section>
+  <section class="question-list section"><div class="section-inner">
+    {categories.map((cat, i) => <article id={cat.id}><span>0{i+1}</span><div><p class="eyebrow">{cat.data.shortHeading}</p><h2>{cat.data.heading}</h2><p>{cat.data.introduction}</p><ArrowLink href={`/research/${cat.id}/`} label="Learn more" /></div></article>)}
+  </div></section>
+</BaseLayout>
+<style>
+.question-list{padding-top:0;padding-bottom:0}.question-list article{display:grid;grid-template-columns:64px 1fr;gap:1.5rem;border-bottom:1px solid var(--line);padding:clamp(2.7rem,4.5vw,4.5rem) 0}.question-list article>span{font:400 .72rem var(--mono);color:var(--red)}.question-list h2{font-size:clamp(2rem,3.8vw,3.8rem);margin-bottom:1.2rem;max-width:950px}.question-list article div>p:not(.eyebrow){max-width:820px;font-size:1.05rem}.question-list .arrow-link{margin-top:.6rem}@media(max-width:560px){.question-list article{grid-template-columns:1fr;gap:.4rem}}
+</style>

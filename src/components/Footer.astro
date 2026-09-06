@@ -1,0 +1,18 @@
+---
+import { NAV, SITE, withBase } from '../config/site';
+---
+<footer class="site-footer">
+  <div class="footer-lead">
+    <p class="eyebrow">{SITE.institution}</p>
+    <h2>Look deeper.<br />Ask bigger questions.</h2>
+  </div>
+  <div class="footer-grid">
+    <div><strong>{SITE.name}</strong><p>{SITE.descriptor}</p></div>
+    <nav aria-label="Footer navigation">{NAV.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}</nav>
+    <div><a href={`mailto:${SITE.email}`}>{SITE.email}</a><p>Hefei, Anhui, China</p></div>
+  </div>
+  <div class="footer-base">
+    <span>© {new Date().getFullYear()} USTC Active Universe</span>
+    <span>NASA Horizon-inspired; not affiliated with NASA.</span>
+  </div>
+</footer>

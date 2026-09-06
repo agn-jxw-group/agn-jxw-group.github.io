@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArrowLink from '../../components/ArrowLink.astro';
+import { withBase } from '../../config/site';
+const activities=(await getCollection('activities')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+---
+<BaseLayout title="Activity" description="Outings, celebrations and life together in the USTC Active Universe group.">
+  <section class="page-hero"><div><p class="eyebrow">Activity</p><h1>Science is a team sport.</h1><p class="lede">Ideas move faster when people know one another. These are a few moments beyond seminars, code and observing proposals.</p></div></section>
+  <section class="section"><div class="section-inner"><div class="activity-grid">{activities.map((activity)=><article><a class="activity-image" href={withBase(`/activities/${activity.id}/`)}><img src={withBase(activity.data.cover)} alt={activity.data.coverAlt} /></a><div><p class="eyebrow">{activity.data.date.toLocaleDateString('en',{month:'long',year:'numeric'})}</p><h2>{activity.data.title}</h2><p>{activity.data.summary}</p><ArrowLink href={`/activities/${activity.id}/`} label="Open gallery" /></div></article>)}</div></div></section>
+</BaseLayout>
+<style>.activity-grid article{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(2rem,6vw,7rem);padding-bottom:5rem}.activity-image{overflow:hidden}.activity-image img{width:100%;height:clamp(380px,50vw,680px);object-fit:cover;transition:transform .4s}.activity-image:hover img{transform:scale(1.02)}.activity-grid article>div{align-self:center}.activity-grid h2{font-size:clamp(2.4rem,5vw,5rem);margin-bottom:1.5rem}@media(max-width:800px){.activity-grid article{grid-template-columns:1fr}}</style>

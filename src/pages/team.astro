@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import { withBase } from '../config/site';
+const people = (await Promise.all((await getCollection('people')).map(async (person) => ({
+  person,
+  Content: (await render(person)).Content,
+})))).sort((a, b) =>
+  a.person.data.order - b.person.data.order || a.person.id.localeCompare(b.person.id),
+);
+const groups = [
+  {id:'leaders',label:'Principal Investigators'}, {id:'postdocs',label:'Postdoctoral researchers'},
+  {id:'graduate',label:'Graduate students'}, {id:'undergraduate',label:'Undergraduate students'},
+  {id:'visiting',label:'Visiting scholars'}, {id:'past',label:'Past members'},
+];
+---
+<BaseLayout title="Team" description="Meet the USTC Active Universe research group.">
+  <section class="page-hero"><div><p class="eyebrow">Team</p><h1>Different paths.<br />Shared questions.</h1><p class="lede">We bring together observers, data explorers and physical modelers to make sense of the high-energy sky.</p></div></section>
+  <section class="section team-section"><div class="section-inner">
+    {groups.map((group) => { const members=people.filter(({person})=>person.data.group===group.id); return members.length > 0 && <section class="people-group"><h2>{group.label}</h2>{members.map(({person, Content})=><article class="person-row" id={person.id}>
+      <div class="portrait">{person.data.portrait ? <img src={withBase(person.data.portrait)} alt={`Portrait of ${person.data.name}`} /> : <span aria-label={`Portrait placeholder for ${person.data.name}`}>{person.data.initials}</span>}</div>
+      <div class="person-name"><p class="eyebrow">{person.data.role}</p><h3>{person.data.name}</h3>{person.data.nameZh && <p lang="zh-Hans">{person.data.nameZh}</p>}</div>
+      <div class="person-bio">{person.data.interests && <ul class="tag-list">{person.data.interests.map((i)=><li>{i}</li>)}</ul>}{person.body?.trim() ? <div class="person-copy"><Content /></div> : person.data.bio && <p>{person.data.bio}</p>}<div class="person-links">{person.data.homepage && <ArrowLink href={person.data.homepage} label="Homepage" external />}{person.data.email && <a href={`mailto:${person.data.email}`}>{person.data.email}</a>}</div></div>
+    </article>)}</section>})}
+  </div></section>
+</BaseLayout>
+<style>
+.team-section{padding-top:2rem}.people-group{margin-bottom:clamp(4rem,8vw,8rem)}.people-group>h2{font-size:clamp(2rem,4vw,4rem);padding-bottom:1.5rem;border-bottom:1px solid #000;margin:0}.person-row{display:grid;grid-template-columns:190px minmax(210px,.65fr) minmax(300px,1.5fr);gap:clamp(1.5rem,4vw,4rem);padding:2.3rem 0;border-bottom:1px solid var(--line);align-items:start}.portrait{aspect-ratio:1;background:var(--carbon);display:grid;place-items:center;overflow:hidden}.portrait span{font:500 2rem var(--mono);color:#fff;letter-spacing:.05em}.portrait img{width:100%;height:100%;object-fit:cover}.person-name h3{margin:0 0 .5rem}.person-name>p:last-child{color:var(--grey)}.person-bio>p,.person-copy{max-width:720px}.person-copy :global(p){margin:0 0 1rem}.person-copy :global(a){text-decoration-thickness:1px;text-underline-offset:3px}.person-copy :global(a:hover){color:var(--red)}.person-links{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}.person-links>a:not(.arrow-link){font-size:.85rem}.person-links .arrow-icon{width:1.8rem;height:1.8rem}@media(max-width:850px){.person-row{grid-template-columns:130px 1fr}.person-bio{grid-column:2}}@media(max-width:560px){.person-row{grid-template-columns:90px 1fr;gap:1.1rem}.person-bio{grid-column:1/-1}}
+</style>

@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { withBase } from '../config/site';
+
+interface Props {
+  entry: CollectionEntry<'news'>;
+  size?: 'pinned' | 'recent' | 'archive';
+}
+
+const { entry, size = 'archive' } = Astro.props;
+const { title, date, image, imageAlt, imageCredit, url, pinned } = entry.data;
+const isExternal = Boolean(url && /^(https?:|mailto:)/.test(url));
+const href = url ? (isExternal ? url : withBase(url)) : undefined;
+const formattedDate = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
+}).format(date);
+---
+<article class:list={['news-card', `news-card--${size}`, { 'news-card--linked': href }]}>
+  <div class="news-card__visual">
+    <img src={withBase(image)} alt={imageAlt} loading="lazy" decoding="async" />
+    <div class="news-card__shade"></div>
+    <div class="news-card__copy">
+      <p class="news-card__meta">{pinned && <span>PINNED · </span>}{formattedDate}</p>
+      {href ? <h3><a href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noreferrer' : undefined}>{title}</a></h3> : <h3>{title}</h3>}
+    </div>
+  </div>
+  <p class="news-card__credit">{imageCredit}</p>
+</article>
+
+<style>
+  .news-card{position:relative;min-width:0}.news-card__visual{position:relative;overflow:hidden;background:var(--carbon);min-height:250px}.news-card__visual img,.news-card__shade{position:absolute;inset:0;width:100%;height:100%}.news-card__visual img{object-fit:cover;transition:transform .4s ease}.news-card__shade{background:linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.3) 68%,rgba(0,0,0,.08) 100%)}.news-card__copy{position:absolute;z-index:1;inset:auto clamp(1.15rem,2vw,1.8rem) clamp(1.15rem,2vw,1.7rem);color:#fff}.news-card__meta{margin:0 0 .55rem;font:500 .64rem/1.35 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:#d5d5d7}.news-card__meta span{color:#ff746c}.news-card h3{margin:0;color:#fff;font-size:clamp(1.3rem,2vw,2rem);line-height:1.04}.news-card h3 a{color:inherit;text-decoration:none}.news-card h3 a::after{content:'';position:absolute;inset:0}.news-card__credit{margin:.5rem 0 0;font:400 .6rem/1.45 var(--mono);color:var(--carbon-60)}.news-card--pinned,.news-card--pinned .news-card__visual{height:100%}.news-card--pinned .news-card__visual{min-height:520px}.news-card--pinned h3{font-size:clamp(2rem,3.4vw,3.6rem);max-width:680px}.news-card--recent .news-card__visual{min-height:250px}.news-card--archive .news-card__visual{aspect-ratio:16/10;min-height:0}.news-card--linked:hover img{transform:scale(1.025)}.news-card h3 a:focus-visible{outline:3px solid #fff;outline-offset:5px}
+  @media(max-width:1000px){.news-card--pinned .news-card__visual{min-height:390px}}
+  @media(max-width:600px){.news-card--pinned .news-card__visual,.news-card--recent .news-card__visual{min-height:260px}.news-card--pinned h3{font-size:clamp(1.7rem,8vw,2.5rem)}}
+  @media(prefers-reduced-motion:reduce){.news-card__visual img{transition:none}}
+</style>

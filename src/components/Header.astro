@@ -1,0 +1,20 @@
+---
+import { NAV, SITE, withBase } from '../config/site';
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? pathname === withBase('') : pathname.startsWith(withBase(href));
+---
+<header class="site-header">
+  <a class="site-brand" href={withBase('')} aria-label={`${SITE.name} home`}>
+    <span class="brand-mark" aria-hidden="true"><span></span></span>
+    <span><strong>{SITE.name}</strong><small>{SITE.descriptor}</small></span>
+  </a>
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    {NAV.map((item) => <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>)}
+  </nav>
+  <details class="mobile-menu">
+    <summary><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></summary>
+    <nav aria-label="Mobile navigation">
+      {NAV.map((item) => <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}<span aria-hidden="true">↗</span></a>)}
+    </nav>
+  </details>
+</header>

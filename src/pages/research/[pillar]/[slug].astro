@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArrowLink from '../../../components/ArrowLink.astro';
+import StoryFigure from '../../../components/StoryFigure.astro';
+export async function getStaticPaths(){return (await getCollection('research',({data})=>!data.draft)).map((story)=>({params:{pillar:story.data.pillar,slug:story.id},props:{story}}));}
+const { story } = Astro.props;
+const { Content } = await render(story);
+---
+<BaseLayout title={story.data.title} description={story.data.summary} image={story.data.figure}>
+  <article>
+    <header class="story-hero"><div><p class="eyebrow">{story.data.journal} · {story.data.pillar}</p><h1>{story.data.publicQuestion}</h1><p>{story.data.summary}</p></div></header>
+    <div class="story-body section"><div class="prose"><p class="leadership">{story.data.leadership}</p><Content components={{ StoryFigure }} />
+      <div class="paper-link"><p class="eyebrow">Read the research</p><h2>{story.data.paperTitle}</h2><p>{story.data.citation}</p><ArrowLink href={story.data.paperUrl} label="Open the paper" external /></div></div></div>
+  </article>
+</BaseLayout>
+<style>
+.story-hero{padding:clamp(3.5rem,6vw,5.25rem) var(--pad);background:#fff}.story-hero>div{max-width:var(--max);margin:auto}.story-hero h1{max-width:960px;margin-bottom:1.35rem;font-size:clamp(2.6rem,5.2vw,4.5rem);overflow-wrap:anywhere}.story-hero>div>p:last-child{max-width:720px;font-size:1.08rem}.story-body{padding-top:clamp(2.5rem,4vw,3.4rem)}.leadership{font-weight:600;border-left:4px solid var(--red);padding-left:1.2rem}.paper-link{border-top:1px solid var(--line);margin-top:4rem;padding-top:2.5rem}.paper-link h2{font-size:clamp(1.65rem,3vw,2.55rem);overflow-wrap:anywhere}.paper-link>p:not(.eyebrow){color:var(--carbon-60)}
+</style>
