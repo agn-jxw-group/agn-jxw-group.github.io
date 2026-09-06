@@ -20,7 +20,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          BASE_PATH: /agn-jxw-group/
+          BASE_PATH: /
           SITE_URL: https://${{ github.repository_owner }}.github.io
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

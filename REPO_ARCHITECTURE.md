@@ -3,7 +3,7 @@
 The production repository is intentionally small and content-first.
 
 ```text
-agn-jxw-group/
+agn-jxw-group.github.io/
 ├── README.md                         how to preview and contribute
 ├── astro.config.mjs                 Astro and GitHub Pages settings
 ├── package.json                     build tools and commands

@@ -14,7 +14,7 @@ export const SITE = {
   heroTitle: 'How Black Holes Light Up the Universe',
   heroSubtitle:
     'We study how supermassive black holes feed, flicker, and reshape their surroundings—and use the X-ray sky to uncover the most energetic objects in the cosmos.',
-  repositoryName: 'agn-jxw-group',
+  repositoryName: 'agn-jxw-group.github.io',
   email: 'jxw@ustc.edu.cn',
 } as const;
 

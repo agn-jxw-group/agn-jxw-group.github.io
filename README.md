@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open the address printed in the terminal. Before opening a pull request, run `npm run build`. To imitate the GitHub project URL, run `BASE_PATH=/agn-jxw-group/ npm run build` and then `BASE_PATH=/agn-jxw-group/ npm run preview`.
+Open the address printed in the terminal. Before opening a pull request, run `npm run build`. The organization Pages site is served directly from `/`, so the ordinary local build and preview use the same base path as `https://agn-jxw-group.github.io/`.
 
 ## The simple mental model
 
