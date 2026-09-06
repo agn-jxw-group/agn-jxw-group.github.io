@@ -3,7 +3,7 @@ name: Bo-Ran Li
 nameZh: 李博然
 role: Undergraduate student
 group: undergraduate
-order: 1
+order: 2
 initials: BRL
 ---
 

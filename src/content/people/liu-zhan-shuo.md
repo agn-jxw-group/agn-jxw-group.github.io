@@ -3,7 +3,7 @@ name: Zhan-Shuo Liu
 nameZh: 刘展硕
 role: Undergraduate student
 group: undergraduate
-order: 1
+order: 2
 initials: ZSL
 ---
 
