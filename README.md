@@ -4,7 +4,7 @@
 
 The website has two main purposes:
 
-- explain our research on active galactic nuclei, supermassive black holes, and the X-ray Universe in clear and attractive language that could be understood by the public;
+- explain our research on active galactic nuclei, supermassive black holes, and the X-ray Universe in clear, engaging language accessible to the public;
 - introduce the group to prospective students—especially undergraduates—and help them find a way into astronomical research.
 
 The site is actively maintained. Group members and alumni are encouraged to correct existing material and contribute new research stories, profiles, facilities, news, and activity photographs.
@@ -78,15 +78,16 @@ For a small correction, edit the relevant file directly in a branch or fork. For
 
 Please keep these principles in mind:
 
+- **Content contributions should normally modify only `.md` or `.mdx` files. Please do not modify shared `.astro` or `.css` files without approval from a repository administrator.** For most contributions, editing `.md` or `.mdx` files is sufficient.
 - Write for the public. Explain the question and result before introducing specialist terminology.
+- Place published images below `public/images/`, then reference them from the relevant `.md` or `.mdx` files.
+- Avoid adding unnecessarily large images, which can slow page loading. If a full-resolution file is needed, link to an externally hosted copy instead.
 - Include research led by, or scientifically central to, the group; avoid papers in which group involvement is only marginal.
-- Do not invent biographies, research interests, affiliations, or contact information.
-- Do not publish student email addresses or other personal information without permission.
-- Confirm consent before publishing identifiable activity photographs.
 - Every image needs useful alternative text and an explicit credit. Use an authoritative source link where applicable.
-- Place published images below `public/images/`; never link pages to `/tmp`, ScholarAIO directories, local absolute paths, or `source-assets/`.
-- Do not enlarge scientific plots beyond their useful native resolution. Prefer lossless PNG for plots and high-quality JPEG/WebP for photographs or rendered artwork.
 - Run `npm run build` and inspect the affected page on both a wide and narrow screen before opening a Pull Request.
+
+> [!NOTE]
+> **Preparing figures for the website:** keep the full-resolution original in `source-assets/` and publish only the web-ready copy under `public/images/`. For photographs or artist impressions, create a high-quality JPEG with `sips -Z 2560 -s format jpeg -s formatOptions 96 INPUT_IMAGE --out public/images/PATH/OUTPUT.jpg`. For scientific plots, preserve PNG and its original resolution; reduce its file size losslessly with `oxipng -o 4 --out public/images/PATH/OUTPUT.png INPUT_IMAGE.png` (install with `brew install oxipng` on macOS). Do not use lossy PNG tools such as `pngquant` for scientific figures, and always inspect labels, curves, and fine details before committing the result.
 
 ### Research stories
 
