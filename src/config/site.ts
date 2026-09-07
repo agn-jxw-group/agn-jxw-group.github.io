@@ -32,20 +32,20 @@ export const CONTACTS = [
     focus: 'AGN physics, X-ray astronomy, and multi-wavelength surveys',
     office: '理化大楼18-003',
     email: 'jxw@ustc.edu.cn',
-    homepage: 'https://faculty.ustc.edu.cn/wangjunxian/en/index.htm',
+    homepage: 'http://staff.ustc.edu.cn/~jxw/',
   },
   {
     name: 'Zhen-Yi Cai',
     focus: 'AGN variability, accretion physics, and galaxy evolution',
     office: '物质科研楼C1010-3',
     email: 'zcai@ustc.edu.cn',
-    homepage: 'https://staff.ustc.edu.cn/~zcai/',
+    homepage: 'http://staff.ustc.edu.cn/~zcai/',
   },
   {
     name: 'Teng Liu',
     focus: 'X-ray surveys, active galaxies, galaxy clusters, and the hot Universe',
     office: '理化大楼17-012',
     email: 'liuteng@ustc.edu.cn',
-    homepage: 'https://en.physics.ustc.edu.cn/2024/1211/c37700a664802/page.htm',
+    homepage: 'https://astro.ustc.edu.cn/2023/0926/c14965a613447/page.htm',
   },
 ] as const;

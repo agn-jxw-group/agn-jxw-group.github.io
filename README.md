@@ -1,8 +1,59 @@
 # USTC Active Universe
 
-The public website for the USTC AGN & X-ray Astrophysics Group. It is a static [Astro](https://astro.build/) site: most updates are Markdown files, so contributors do not need to understand the page code.
+[USTC Active Universe](https://agn-jxw-group.github.io/) is the public website of the USTC AGN & X-ray Astrophysics Group led by Jun-Xian Wang, Zhen-Yi Cai, and Teng Liu.
 
-## Preview on your computer
+The website has two main purposes:
+
+- explain our research on active galactic nuclei, supermassive black holes, and the X-ray Universe in clear and attractive language that could be understood by the public;
+- introduce the group to prospective students—especially undergraduates—and help them find a way into astronomical research.
+
+The site is actively maintained. Group members and alumni are encouraged to correct existing material and contribute new research stories, profiles, facilities, news, and activity photographs.
+
+## How the website is built
+
+The site uses [Astro](https://astro.build/) to turn small content files and reusable page components into a fast static website. Most contributors only need to edit Markdown; knowledge of HTML, CSS, or JavaScript is not normally required.
+
+In simplified form, the build works like this:
+
+1. Content is written in Markdown (`.md`) or MDX (`.mdx`) under `src/content/`.
+2. `src/content.config.ts` checks that required information—such as titles, image descriptions, and credits—is present.
+3. Files under `src/pages/` and `src/layouts/` arrange that content into pages.
+4. Reusable interface elements live in `src/components/`.
+5. `src/styles/global.css` applies the common visual language across the site.
+6. Astro generates ordinary static HTML, CSS, and images for GitHub Pages.
+
+Research stories use MDX because it combines normal Markdown with simple components such as `<StoryFigure>`, allowing figures to appear beside the paragraphs that explain them.
+
+### Design language
+
+The interface is inspired by NASA's Horizon Design System: immersive astronomical imagery, Inter headlines, Public Sans body text, DM Mono labels, carbon-black surfaces, thin dividers, restrained red accents, and circular-arrow actions. The layout is responsive and is designed to remain readable on desktop, tablet, and phone screens.
+
+This is an independent USTC group website and is not affiliated with NASA. Retain all font, image, observatory, mission, artist, and paper credits when modifying the site.
+
+## Website modules and where to edit them
+
+| Module | Public route | Main content | Page/layout code | Images |
+| --- | --- | --- | --- | --- |
+| Home | `/` | `src/config/site.ts` and recent entries from `src/content/news/` | `src/pages/index.astro` | `public/images/hero/` and images selected by News records |
+| Research overview and pillars | `/research/` | `src/content/research-categories/` | `src/pages/research/index.astro` and `src/pages/research/[pillar]/index.astro` | `public/images/research/categories/` |
+| Research stories | `/research/<pillar>/<story>/` | `src/content/research/` | `src/pages/research/[pillar]/[slug].astro` | `public/images/research/` |
+| Team | `/team/` | `src/content/people/` | `src/pages/team.astro` | `public/images/people/` |
+| Facilities | `/facilities/` | `src/content/facilities/` | `src/pages/facilities.astro` | `public/images/facilities/` |
+| Activities | `/activities/` | `src/content/activities/` | `src/pages/activities/` | `public/images/activities/<event>/` |
+| News | `/news/` | `src/content/news/` | `src/pages/news/index.astro` and `src/components/NewsCard.astro` | Any suitable credited image under `public/images/` |
+| Join us | `/join/` | PI contacts in `src/config/site.ts`; introductory wording in `src/pages/join.astro` | `src/pages/join.astro` | None currently required |
+
+Other important locations:
+
+- `src/config/site.ts`: site name, descriptor, homepage hero text, navigation labels, and PI contact information.
+- `src/content.config.ts`: validated fields accepted by every content collection.
+- `src/styles/global.css`: global colors, fonts, spacing, responsive behavior, and shared visual rules.
+- `src/components/`: reusable header, footer, links, News cards, and research figures.
+- `templates/`: safe starting examples for new content.
+- `public/images/`: web-ready images that are published with the site.
+- `source-assets/`: local, Git-ignored originals and editorial source material; files here never appear on the website directly.
+
+## Preview the website locally
 
 Install [Node.js 22](https://nodejs.org/), then run:
 
@@ -11,45 +62,95 @@ npm install
 npm run dev
 ```
 
-Open the address printed in the terminal. Before opening a pull request, run `npm run build`. The organization Pages site is served directly from `/`, so the ordinary local build and preview use the same base path as `https://agn-jxw-group.github.io/`.
+Open the local address printed in the terminal, usually `http://127.0.0.1:4321/`. The development server watches the source files: saving a Markdown, MDX, Astro, or CSS file normally updates the open page automatically.
 
-## The simple mental model
+Before submitting any change, run:
 
-- `src/config/site.ts` controls the site name, descriptor, hero text, navigation and group-leader contacts.
-- `src/content/research/` contains one MDX file per paper story.
-- `src/content/research-categories/` contains the four public research questions and their credited hero images.
-- `src/content/people/` contains one Markdown file per person.
-- `src/content/facilities/` contains one Markdown file per telescope or mission.
-- `src/content/activities/` contains one Markdown file per event.
-- `src/content/news/` contains one Markdown file per homepage/archive announcement.
-- `public/images/` contains optimized images used by those files.
-- `source-assets/` is a local, Git-ignored archive for originals and editorial source files. The website serves only the optimized copies in `public/images/`.
-- `templates/` contains safe examples to copy.
+```sh
+npm run build
+```
 
-The front matter at the top of each Markdown or MDX file is checked by `src/content.config.ts`. Missing figure credit, alternative text or other required information stops the build before it can be merged.
+The build performs Astro type and content validation, generates the complete website, and checks internal links, public asset paths, image alternatives, and research-figure captions.
 
-Research URLs follow the content hierarchy: `/research/` introduces the four questions, `/research/feeding/` shows one pillar, and `/research/feeding/universal-quasar-sed/` contains a complete story.
+## How to contribute
 
-## Add something
+For a small correction, edit the relevant file directly in a branch or fork. For a new entry, copy the closest example from `templates/`, rename it appropriately, and fill in its front matter and body. Submit the result as a Pull Request.
 
-Copy the closest file from `templates/`, rename it with a short lowercase slug, fill in every field, and put its image in the matching `public/images/` folder. Research stories use the `.mdx` extension: this behaves like ordinary Markdown but also lets you place a `<StoryFigure>` between the paragraphs that discuss it. See `templates/research-story.mdx` for a complete example.
+Please keep these principles in mind:
 
-Use `figure` for the primary story/social image and, when useful, `cardFigure` for a simpler crop on the research pillar page. News records choose their own display image and may reuse that crop. Every `<StoryFigure>` requires `src`, `alt`, `caption`, and `credit`; `sourceUrl` and `size` are optional. `caption` should say what the reader should notice. `credit` should identify the paper figure, observatory, artist, or institution. Images must live below `public/images/`, and the MDX path must begin `/images/`—the build rejects figures that point into `/tmp`, ScholarAIO, or `source-assets`.
+- Write for the public. Explain the question and result before introducing specialist terminology.
+- Include research led by, or scientifically central to, the group; avoid papers in which group involvement is only marginal.
+- Do not invent biographies, research interests, affiliations, or contact information.
+- Do not publish student email addresses or other personal information without permission.
+- Confirm consent before publishing identifiable activity photographs.
+- Every image needs useful alternative text and an explicit credit. Use an authoritative source link where applicable.
+- Place published images below `public/images/`; never link pages to `/tmp`, ScholarAIO directories, local absolute paths, or `source-assets/`.
+- Do not enlarge scientific plots beyond their useful native resolution. Prefer lossless PNG for plots and high-quality JPEG/WebP for photographs or rendered artwork.
+- Run `npm run build` and inspect the affected page on both a wide and narrow screen before opening a Pull Request.
 
-The “Read the research” panel is generated from `paperTitle`, `citation`, and `paperUrl`. Copy the original published title exactly and format the citation in the standard astronomy style, for example `Petrucci, P. O., Gronkiewicz, D., Rozanska, A., et al. 2020, A&A, 634, A85`. Keep the story public-facing: begin with the question, place each figure near its explanation, and state the main caveat.
+### Research stories
 
-For Team profiles, use a surname-first filename such as `chen-shi-jiang.md`, while keeping the displayed `name` in its natural form (`Shi-Jiang Chen`). The filename becomes the stable Team anchor, so links to this example end in `/team/#chen-shi-jiang`. For students, `order` is the seniority rank within the section: `1` is the most senior grade, then `2`, and so on. People with the same rank are alphabetized by their surname-first filename. The `leaders`, `postdocs`, and `past` sections may use `order` for their explicit group ordering.
+Copy `templates/research-story.mdx` into `src/content/research/`. Use a short lowercase filename; this filename becomes the final part of the story URL.
 
-Write the biography below the closing `---` in the person file. It supports normal Markdown links such as `[Prof. Claudio Ricci](https://www.claudioricci.eu)`. The older `bio:` front-matter field remains supported for existing profiles. Available `group` values are `leaders`, `postdocs`, `graduate`, `undergraduate`, `visiting`, and `past`.
+The public story title and summary should emphasize the main scientific result without overstating it. `paperTitle` must reproduce the original paper title, while `citation` should use standard astronomy formatting, for example:
 
-For News, copy `templates/news.md`. The homepage shows exactly one published entry with `pinned: true` plus the four newest non-pinned entries; `/news/` shows the complete archive in reverse chronological order. The optional `url` accepts either an internal `/path/` or a complete `https://` link. News body text is not displayed in v1. Keep exactly one non-draft entry pinned or the build will stop with an explanatory error.
+```text
+Petrucci, P. O., Gronkiewicz, D., Rozanska, A., et al. 2020, A&A, 634, A85
+```
 
-Each research-category file also records `heroImage`, `heroAlt`, `heroCredit`, and `heroSourceUrl`. Keep the source URL authoritative and describe what the image shows rather than repeating its filename. Photographic or rendered hero images may use high-quality JPEG/WebP; plots and diagrams should remain lossless PNG whenever the source permits so labels and fine lines stay sharp. Never upscale a plot: choose `narrow` or `standard` when the native file is small.
+Place each `<StoryFigure>` immediately after the paragraph that introduces it. Every figure requires:
 
-## Publication status
+- `src`: a path beginning with `/images/`;
+- `alt`: what the figure shows for a reader who cannot see it;
+- `caption`: what the reader should notice or learn;
+- `credit`: the paper figure, observatory, artist, or institution that supplied it.
 
-Pull requests and pushes are validated automatically. Public deployment is intentionally gated: the manual Pages workflow runs only after repository administrators create the variable `ENABLE_PAGES_DEPLOY=true`. Do not enable it until the group has reviewed the content and supplied its official remote.
+Use `figure` for the primary article image and optional `cardFigure` for a simpler crop on compact cards. Use `size="narrow"` or `size="standard"` for lower-resolution plots rather than upscaling them.
 
-## Design provenance
+Research-pillar introductions and their external paper lists live separately in `src/content/research-categories/`. Each pillar record also controls its heading and credited hero image.
 
-The interface is inspired by NASA’s Horizon Design System—Inter headlines, Public Sans body text, DM Mono labels, carbon surfaces, thin rules, restrained NASA red and circular-arrow actions. It is an independent USTC site and is not affiliated with NASA. Inter and DM Mono files were sourced from the local NASA HDS reference repository; Public Sans is provided by Fontsource. Retain all upstream font and image credits when redistributing the site.
+### Team profiles
+
+Copy `templates/person.md` into `src/content/people/`. Use a surname-first filename such as `chen-shi-jiang.md`, while keeping the displayed name in its natural form (`Shi-Jiang Chen`). The filename also becomes the stable Team anchor: `/team/#chen-shi-jiang`.
+
+Available groups are `leaders`, `postdocs`, `graduate`, `undergraduate`, `visiting`, and `past`. For students, `order` represents academic seniority within the section: `1` is the most senior rank, followed by `2`, and so on. People at the same rank are alphabetized by surname-first filename.
+
+Write the biography below the closing `---`. Ordinary Markdown links are supported, for example:
+
+```md
+Working with [Prof. Example](https://example.edu/).
+```
+
+Portraits are optional. If no portrait is supplied, the site shows the person's initials.
+
+### Facilities
+
+Copy `templates/facility.md` into `src/content/facilities/`. Describe both what the instrument does and how the group uses or participates in it. `relatedPapers` should contain only directly relevant group-led work; leave the list empty when no appropriate paper is available.
+
+### Activities
+
+Copy `templates/activity.md` into `src/content/activities/`. Store its photographs in a dedicated folder below `public/images/activities/`. Set `consentConfirmed: true` only after confirming that identifiable participants permit public use of the photographs.
+
+### News
+
+Copy `templates/news.md` into `src/content/news/`. News entries may link to internal pages or complete external URLs. The homepage displays exactly one published entry with `pinned: true`, followed by the four newest non-pinned entries; `/news/` contains the complete archive in reverse chronological order. Keep exactly one non-draft entry pinned, or the build will fail.
+
+## What belongs in Git
+
+Commit source pages, Markdown and MDX content, configuration, templates, scripts, the package lockfile, and optimized images under `public/images/`.
+
+Do not commit:
+
+- `node_modules/`;
+- generated output such as `dist/` or `.astro/`;
+- `.env` files;
+- macOS `.DS_Store` files;
+- local originals or working documents in `source-assets/`.
+
+These exclusions are already recorded in `.gitignore`.
+
+## Deployment
+
+The site is hosted as the `agn-jxw-group` organization website at [https://agn-jxw-group.github.io/](https://agn-jxw-group.github.io/). Pull requests and pushes are validated by `.github/workflows/check.yml`.
+
+Publication is handled by `.github/workflows/deploy.yml`. Repository administrators can run **Deploy GitHub Pages (review gate)** from the Actions tab when the repository variable `ENABLE_PAGES_DEPLOY` is set to `true`.
