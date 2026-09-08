@@ -5,6 +5,7 @@ nameZh: 示例姓名
 role: Graduate student
 group: graduate
 # For students, order is the grade rank: 1 is the most senior. Ties sort by filename.
+# Use templates/past-member.md instead when adding a former member.
 order: 6
 initials: EN
 interests: [AGN variability, accretion disks]

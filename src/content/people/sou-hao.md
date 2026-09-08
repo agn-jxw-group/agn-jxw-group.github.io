@@ -5,6 +5,6 @@ role: Graduate student
 group: graduate
 order: 1
 initials: HS
+bio: Hao is currently a final year PhD student, working with Prof. Jun-Xian Wang on NLR.
 ---
 
-Hao is currently a final year PhD student, working with Prof. Jun-Xian Wang on NLR.

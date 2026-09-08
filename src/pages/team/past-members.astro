@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PastMemberRow from '../../components/PastMemberRow.astro';
+import { getPastMembers } from '../../lib/past-members';
+
+const members = await getPastMembers();
+---
+<BaseLayout title="Past members" description="A concise archive of past members of the USTC AGN & X-ray Astrophysics Group.">
+  <section class="page-hero"><div><p class="eyebrow">Team archive</p><h1>Full list of<br />past members.</h1><p class="lede">The people who have studied, visited and worked with our group across the years.</p></div></section>
+  <section class="section archive-section"><div class="section-inner">
+    <header class="archive-heading"><p class="eyebrow">{members.length} people · one shared history</p><p>Each person appears once, with multiple stages in the group recorded together where known.</p></header>
+    <div class="archive-list">{members.map((member) => <PastMemberRow member={member} />)}</div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .archive-section{padding-top:2rem}.archive-heading{display:grid;grid-template-columns:1fr minmax(280px,.7fr);gap:2rem;align-items:end;padding:1.5rem 0;border-bottom:1px solid #000}.archive-heading p{margin:0}.archive-heading>p:last-child{max-width:34rem}.archive-list{margin-bottom:2rem}@media(max-width:700px){.archive-heading{grid-template-columns:1fr;gap:.5rem}}
+</style>

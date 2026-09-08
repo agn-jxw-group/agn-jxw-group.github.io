@@ -5,7 +5,7 @@ import { getPublishedNews } from '../../lib/news';
 
 const { entries } = await getPublishedNews();
 ---
-<BaseLayout title="News" description="The latest research, people, and activities from USTC Active Universe.">
+<BaseLayout title="News" description="The latest research, people, and activities from Watching Cosmic Lighthouses.">
   <section class="page-hero"><div><p class="eyebrow">Latest from the group</p><h1>News</h1><p class="lede">Research results, new faces, shared moments, and other updates from our group.</p></div></section>
   <section class="section news-archive"><div class="section-inner">
     <div class="news-grid">{entries.map((entry) => <NewsCard entry={entry} size="archive" />)}</div>

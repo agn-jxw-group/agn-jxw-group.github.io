@@ -58,7 +58,7 @@ const people = defineCollection({
     name: requiredText,
     nameZh: requiredText.optional(),
     role: requiredText,
-    group: z.enum(['leaders', 'postdocs', 'graduate', 'undergraduate', 'visiting', 'past']),
+    group: z.enum(['leaders', 'postdocs', 'graduate', 'undergraduate', 'visiting']),
     order: z.number().int().positive(),
     initials: requiredText,
     interests: z.array(requiredText).min(1).optional(),
@@ -66,6 +66,27 @@ const people = defineCollection({
     homepage: z.url().optional(),
     email: z.email().optional(),
     bio: requiredText.optional(),
+  }),
+});
+
+const pastMemberHistory = z.object({
+  role: z.enum(['postdoc', 'phd', 'masters', 'undergraduate', 'visiting', 'other']),
+  startYear: z.number().int().min(1900).max(2100).optional(),
+  endYear: z.number().int().min(1900).max(2100).optional(),
+}).superRefine((item, context) => {
+  if (item.startYear && item.endYear && item.endYear < item.startYear) {
+    context.addIssue({ code: 'custom', message: 'endYear must not precede startYear' });
+  }
+});
+
+const pastMembers = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/past-members' }),
+  schema: z.object({
+    name: requiredText,
+    nameZh: requiredText.optional(),
+    portrait: publicImage.optional(),
+    featured: z.boolean().default(false),
+    history: z.array(pastMemberHistory).default([]),
   }),
 });
 
@@ -125,4 +146,4 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { research, researchCategories, people, facilities, activities, news };
+export const collections = { research, researchCategories, people, pastMembers, facilities, activities, news };

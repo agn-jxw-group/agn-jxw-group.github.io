@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArrowLink from '../../components/ArrowLink.astro';
 const categories = (await getCollection('researchCategories')).sort((a,b) => a.data.order - b.data.order);
 ---
-<BaseLayout title="Research" description="Four public questions guide the USTC Active Universe research programme.">
+<BaseLayout title="Research" description="Four public questions guide our research into active galaxies and the X-ray Universe.">
   <section class="page-hero"><div><p class="eyebrow">Research</p><h1>We study an active Universe.</h1><p class="lede">A supermassive black hole is smaller than a solar system, yet its light can outshine a galaxy. We use spectra, surveys and changing light to learn how that engine works—and what it changes.</p></div></section>
   <section class="question-list section"><div class="section-inner">
     {categories.map((cat, i) => <article id={cat.id}><span>0{i+1}</span><div><p class="eyebrow">{cat.data.shortHeading}</p><h2>{cat.data.heading}</h2><p>{cat.data.introduction}</p><ArrowLink href={`/research/${cat.id}/`} label="Learn more" /></div></article>)}

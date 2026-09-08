@@ -5,6 +5,6 @@ role: Undergraduate student
 group: undergraduate
 order: 1
 initials: LBY
+bio: Li-Bo is currently a final year undergraduate student, working with Prof. Teng Liu on clusters.
 ---
 
-Li-Bo is currently a final year undergraduate student, working with Prof. Teng Liu on clusters.

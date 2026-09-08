@@ -5,6 +5,6 @@ role: Graduate student
 group: graduate
 order: 1
 initials: HCW
+bio: Hao-Chen is currently a final year PhD student, working with Prof. Jun-Xian Wang on SMBHB.
 ---
 
-Hao-Chen is currently a final year PhD student, working with Prof. Jun-Xian Wang on SMBHB.

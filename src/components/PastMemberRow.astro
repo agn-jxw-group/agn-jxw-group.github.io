@@ -1,0 +1,37 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import { historyYears, memberInitials, pastRoleLabels } from '../lib/past-members';
+import { withBase } from '../config/site';
+
+interface Props {
+  member: CollectionEntry<'pastMembers'>;
+  compact?: boolean;
+}
+
+const { member, compact = false } = Astro.props;
+const { Content } = await render(member);
+---
+<article class:list={['past-member-row', { compact }]} id={member.id}>
+  <div class="past-portrait">
+    {member.data.portrait
+      ? <img src={withBase(member.data.portrait)} alt={`Portrait of ${member.data.name}`} loading="lazy" />
+      : <span aria-hidden="true">{memberInitials(member.data.name)}</span>}
+  </div>
+  <div class="past-name">
+    <h3>{member.data.name}</h3>
+    {member.data.nameZh && <p lang="zh-Hans">{member.data.nameZh}</p>}
+  </div>
+  <ul class="past-history" aria-label={`History for ${member.data.name}`}>
+    {member.data.history.map((item) => {
+      const years = historyYears(item.startYear, item.endYear);
+      return <li><strong>{pastRoleLabels[item.role]}</strong>{years && <span>{years}</span>}</li>;
+    })}
+  </ul>
+  {member.body?.trim() && <div class="past-note"><Content /></div>}
+</article>
+
+<style>
+  .past-member-row{display:grid;grid-template-columns:64px minmax(175px,.7fr) minmax(230px,.9fr) minmax(260px,1.25fr);gap:clamp(1rem,2.7vw,2.5rem);align-items:start;padding:1.25rem 0;border-bottom:1px solid var(--line);scroll-margin-top:1rem}.past-portrait{width:64px;aspect-ratio:1;background:var(--carbon);display:grid;place-items:center;overflow:hidden}.past-portrait img{width:100%;height:100%;object-fit:cover}.past-portrait span{font:500 .82rem var(--mono);letter-spacing:.05em;color:#fff}.past-name h3{font-size:1.1rem;line-height:1.15;letter-spacing:-.02em;margin:.1rem 0 .25rem}.past-name p{font-size:.9rem;color:var(--grey);margin:0}.past-history{list-style:none;padding:0;margin:0;display:grid;gap:.35rem}.past-history li{display:flex;justify-content:space-between;gap:1rem;font-size:.82rem}.past-history strong{font-weight:600}.past-history span{font:400 .72rem var(--mono);color:var(--carbon-60);white-space:nowrap}.past-note{font-size:.86rem;line-height:1.5}.past-note :global(p){margin:0}.past-note :global(a){text-underline-offset:3px}.compact{grid-template-columns:56px minmax(160px,.7fr) minmax(220px,1fr) minmax(240px,1.2fr);padding:1rem 0}.compact .past-portrait{width:56px}
+  @media(max-width:850px){.past-member-row,.compact{grid-template-columns:56px minmax(150px,.7fr) minmax(230px,1fr)}.past-note{grid-column:2/-1}}
+  @media(max-width:580px){.past-member-row,.compact{grid-template-columns:48px 1fr;gap:.7rem 1rem}.past-portrait,.compact .past-portrait{width:48px}.past-history,.past-note{grid-column:2}.past-history li{justify-content:flex-start;flex-wrap:wrap}.past-name h3{font-size:1rem}}
+</style>

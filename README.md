@@ -1,6 +1,6 @@
-# USTC Active Universe
+# Watching Cosmic Lighthouses
 
-[USTC Active Universe](https://agn-jxw-group.github.io/) is the public website of the USTC AGN & X-ray Astrophysics Group led by Jun-Xian Wang, Zhen-Yi Cai, and Teng Liu.
+[Watching Cosmic Lighthouses](https://agn-jxw-group.github.io/) is the public website of the USTC AGN & X-ray Astrophysics Group led by Jun-Xian Wang, Zhen-Yi Cai, and Teng Liu.
 
 The website has two main purposes:
 
@@ -38,6 +38,7 @@ This is an independent USTC group website and is not affiliated with NASA. Retai
 | Research overview and pillars | `/research/` | `src/content/research-categories/` | `src/pages/research/index.astro` and `src/pages/research/[pillar]/index.astro` | `public/images/research/categories/` |
 | Research stories | `/research/<pillar>/<story>/` | `src/content/research/` | `src/pages/research/[pillar]/[slug].astro` | `public/images/research/` |
 | Team | `/team/` | `src/content/people/` | `src/pages/team.astro` | `public/images/people/` |
+| Past members | `/team/past-members/` | `src/content/past-members/` | `src/pages/team/past-members.astro` | `public/images/people/past/` |
 | Facilities | `/facilities/` | `src/content/facilities/` | `src/pages/facilities.astro` | `public/images/facilities/` |
 | Activities | `/activities/` | `src/content/activities/` | `src/pages/activities/` | `public/images/activities/<event>/` |
 | News | `/news/` | `src/content/news/` | `src/pages/news/index.astro` and `src/components/NewsCard.astro` | Any suitable credited image under `public/images/` |
@@ -114,7 +115,7 @@ Research-pillar introductions and their external paper lists live separately in 
 
 Copy `templates/person.md` into `src/content/people/`. Use a surname-first filename such as `chen-shi-jiang.md`, while keeping the displayed name in its natural form (`Shi-Jiang Chen`). The filename also becomes the stable Team anchor: `/team/#chen-shi-jiang`.
 
-Available groups are `leaders`, `postdocs`, `graduate`, `undergraduate`, `visiting`, and `past`. For students, `order` represents academic seniority within the section: `1` is the most senior rank, followed by `2`, and so on. People at the same rank are alphabetized by surname-first filename.
+Available groups are `leaders`, `postdocs`, `graduate`, `undergraduate`, and `visiting`. For students, `order` represents academic seniority within the section: `1` is the most senior rank, followed by `2`, and so on. People at the same rank are alphabetized by surname-first filename.
 
 Write the biography below the closing `---`. Ordinary Markdown links are supported, for example:
 
@@ -123,6 +124,10 @@ Working with [Prof. Example](https://example.edu/).
 ```
 
 Portraits are optional. If no portrait is supplied, the site shows the person's initials.
+
+### Past members
+
+Copy `templates/past-member.md` into `src/content/past-members/`. Keep one surname-first file per person and record multiple stages in that same file. Names are required; Chinese names, portraits, roles, dates, and a one-sentence Markdown note are optional. Omit information that cannot be verified rather than guessing it.
 
 ### Facilities
 

@@ -5,6 +5,6 @@ role: Undergraduate student
 group: undergraduate
 order: 1
 initials: SYW
+bio: Si-Yang is currently a final year undergraduate student, working with Prof. Teng Liu on eROSITA X-ray imaging stacking.
 ---
 
-Si-Yang is currently a final year undergraduate student, working with Prof. Teng Liu on eROSITA X-ray imaging stacking.

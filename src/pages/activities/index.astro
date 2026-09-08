@@ -5,7 +5,7 @@ import ArrowLink from '../../components/ArrowLink.astro';
 import { withBase } from '../../config/site';
 const activities=(await getCollection('activities')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
 ---
-<BaseLayout title="Activity" description="Outings, celebrations and life together in the USTC Active Universe group.">
+<BaseLayout title="Activity" description="Outings, celebrations and life together in the USTC AGN & X-ray Astrophysics Group.">
   <section class="page-hero"><div><p class="eyebrow">Activity</p><h1>Science is a team sport.</h1><p class="lede">Ideas move faster when people know one another. These are a few moments beyond seminars, code and observing proposals.</p></div></section>
   <section class="section"><div class="section-inner"><div class="activity-grid">{activities.map((activity)=><article><a class="activity-image" href={withBase(`/activities/${activity.id}/`)}><img src={withBase(activity.data.cover)} alt={activity.data.coverAlt} /></a><div><p class="eyebrow">{activity.data.date.toLocaleDateString('en',{month:'long',year:'numeric'})}</p><h2>{activity.data.title}</h2><p>{activity.data.summary}</p><ArrowLink href={`/activities/${activity.id}/`} label="Open gallery" /></div></article>)}</div></div></section>
 </BaseLayout>

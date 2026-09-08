@@ -5,6 +5,7 @@ role: Graduate student
 group: graduate
 order: 5
 initials: HZD
+homepage: https://ddddddsad.github.io/NeoBlog/AboutMe/aboutme.html
+bio: Hao-Zhe is currently a 2nd year master student, working with Prof. Jun-Xian Wang on the connection of radio emission and BALs.
 ---
 
-Hao-Zhe is currently a 2nd year master student, working with Prof. Jun-Xian Wang on the connection of radio emission and BALs.

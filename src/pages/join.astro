@@ -5,9 +5,53 @@ import { CONTACTS } from '../config/site';
 ---
 <BaseLayout title="Join us" description="Research opportunities for students interested in black holes, galaxies and X-ray astronomy at USTC.">
   <section class="join-hero"><div><p class="eyebrow">Join us</p><h1>Your first research question can start here.</h1><p>Curious about astronomy but unsure whether you are “ready”? You do not need to arrive knowing everything. Bring patience, questions and a willingness to learn how evidence becomes an explanation.</p></div></section>
-  <section class="section"><div class="section-inner"><header class="section-heading"><div><p class="eyebrow">For undergraduates</p><h2>What joining can look like</h2></div><p>A first project is usually small and concrete: learning to read a light curve, checking a catalogue, reproducing a plot or exploring a physical idea with code.</p></header>
+  <section class="section join-body"><div class="section-inner">
+    <header class="section-heading"><div><p class="eyebrow">For undergraduates</p><h2>What joining can look like</h2></div><p>A first project is usually small and concrete: learning to read a light curve, checking a catalogue, reproducing a plot or exploring a physical idea with code.</p></header>
     <div class="steps"><article><span>01</span><h3>Explore</h3><p>Read one of our research stories and notice which question you keep thinking about.</p></article><article><span>02</span><h3>Prepare</h3><p>Tell us what interests you, what courses or coding experience you have, and how much time you can realistically commit.</p></article><article><span>03</span><h3>Write</h3><p>Contact the group leader whose interests are closest. A short, specific email is more useful than a formal one.</p></article></div>
+    <section class="contacts" aria-labelledby="contact-heading">
+      <header class="contact-heading"><div><p class="eyebrow">Ready to talk?</p><h2 id="contact-heading">Contact a group leader.</h2></div><p>Choose the person whose interests are closest to the questions you want to explore.</p></header>
+      <div class="contact-list">{CONTACTS.map((contact)=><article><h3>{contact.name}</h3><p>{contact.focus}</p><div class="contact-details"><p><span>Office</span>{contact.office}</p><a class="email" href={`mailto:${contact.email}`}>{contact.email}</a></div><ArrowLink href={contact.homepage} label="Official profile" external /></article>)}</div>
+    </section>
   </div></section>
-  <section class="contacts section"><div class="section-inner"><p class="eyebrow">Contact a group leader</p><div class="contact-list">{CONTACTS.map((contact)=><article><h2>{contact.name}</h2><p>{contact.focus}</p><div class="contact-details"><p><span>Office</span>{contact.office}</p><a class="email" href={`mailto:${contact.email}`}>{contact.email}</a></div><ArrowLink href={contact.homepage} label="Official profile" external /></article>)}</div></div></section>
 </BaseLayout>
-<style>.join-hero{background:var(--red);padding:clamp(4.5rem,7vw,7rem) var(--pad)}.join-hero>div{max-width:var(--max);margin:auto}.join-hero h1{font-size:clamp(2.8rem,6vw,5.2rem);max-width:1050px;margin-bottom:1.5rem}.join-hero>div>p:last-child{font-size:1.12rem;max-width:750px}.join-hero .eyebrow{color:#3d0000}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,4rem);border-top:1px solid #000;padding-top:1.6rem}.steps article{padding:0}.steps span{font:500 .72rem var(--mono);color:var(--red)}.steps h3{margin:2.2rem 0 .8rem}.contacts{background:var(--carbon);color:#fff}.contacts .eyebrow{color:#aaa}.contact-list article{display:grid;grid-template-columns:1.2fr 1.2fr .8fr .8fr;gap:2rem;align-items:center;padding:2rem 0;border-top:1px solid #444}.contact-list h2{color:#fff;font-size:clamp(1.6rem,2.5vw,2.6rem);margin:0}.contact-list p{margin:0;color:#d1d1d1}.contact-details{display:grid;gap:.55rem}.contact-details p{display:grid;gap:.12rem}.contact-details span{font:500 .62rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#999}.contact-list .email{color:#fff}.contact-list .arrow-link{color:#fff}@media(max-width:900px){.contact-list article{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr;gap:0}.steps article{padding:1.4rem 0;border-bottom:1px solid var(--line)}.steps h3{margin:1.2rem 0 .6rem}}@media(max-width:560px){.contact-list article{grid-template-columns:1fr}.contact-details{gap:.7rem}}</style>
+<style>
+  /* Change this background value to experiment with the Join Us hero color. */
+  .join-hero {
+    background: #BD4444;
+    padding: clamp(4.5rem, 7vw, 7rem) var(--pad);
+  }
+  .join-hero > div { max-width: var(--max); margin: auto; }
+  .join-hero h1 { font-size: clamp(2.8rem, 6vw, 5.2rem); max-width: 1050px; margin-bottom: 1.5rem; }
+  .join-hero > div > p:last-child { font-size: 1.12rem; max-width: 750px; }
+  .join-hero .eyebrow { color: var(--red-dark); }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 4rem); border-top: 1px solid #000; padding-top: 1.6rem; }
+  .steps article { padding: 0; }
+  .steps span { font: 500 .72rem var(--mono); color: var(--red); }
+  .steps h3 { margin: 2.2rem 0 .8rem; }
+
+  .contacts { margin-top: clamp(2.75rem, 4vw, 4rem); border-top: 1px solid #000; padding-top: clamp(2rem, 3vw, 3rem); }
+  .contact-heading { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, .65fr); align-items: end; gap: 2rem; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+  .contact-heading h2 { margin: 0; }
+  .contact-heading .eyebrow { color: var(--red-dark); margin-bottom: .7rem; }
+  .contact-heading > p { max-width: 34rem; margin: 0; }
+  .contact-list article { display: grid; grid-template-columns: 1.2fr 1.2fr .8fr .8fr; gap: 2rem; align-items: center; padding: 2rem 0; border-top: 1px solid var(--line); }
+  .contact-list h3 { font-size: clamp(1.6rem, 2.5vw, 2.6rem); margin: 0; }
+  .contact-list p { margin: 0; }
+  .contact-details { display: grid; gap: .55rem; }
+  .contact-details p { display: grid; gap: .12rem; }
+  .contact-details span { font: 500 .62rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--carbon-60); }
+  .contact-list .email { color: var(--carbon); text-underline-offset: 3px; }
+
+  @media (max-width: 900px) {
+    .contact-heading { grid-template-columns: 1fr; align-items: start; }
+    .contact-list article { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 0; }
+    .steps article { padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
+    .steps h3 { margin: 1.2rem 0 .6rem; }
+  }
+  @media (max-width: 560px) {
+    .contact-list article { grid-template-columns: 1fr; gap: 1rem; }
+    .contact-details { gap: .7rem; }
+  }
+</style>
