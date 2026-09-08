@@ -9,7 +9,11 @@ heroImage: /images/research/categories/feedback-hero.jpg
 heroAlt: Composite view of Hydra A showing pink radio jets from its central supermassive black hole pushing cavities into blue X-ray-emitting cluster gas.
 heroCredit: X-ray NASA/CXC/U.Waterloo/C. Kirkpatrick et al. · Radio NSF/NRAO/VLA · Optical CFHT/DSS
 heroSourceUrl: https://chandra.harvard.edu/photo/2009/hydra/index.html
-relatedPapers: []
+relatedPapers:
+  - title: "Tracing Star Formation in Quasar Hosts via [O II] \u03bb3727: A Kinematically Consistent Approach"
+    authors: Wu et al.
+    year: 2026
+    url: https://doi.org/10.3847/2041-8213/ae5621
 ---
 
 Geometry comes before causality. We first ask where the gas and dust are, how they are illuminated and how the view changes with evolutionary stage—then test whether the central engine changes its host.

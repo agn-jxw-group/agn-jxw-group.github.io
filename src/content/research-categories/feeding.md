@@ -22,6 +22,10 @@ relatedPapers:
     authors: Chen et al.
     year: 2024
     status: Future story — the soft X-ray excess
+  - title: Ensemble Mapping the Inner Structure of Luminous Quasars
+    authors: Wu et al.
+    year: 2023
+    url: https://doi.org/10.1093/mnras/stad903
 ---
 
 We follow energy from the optical accretion disk through ultraviolet light and into the X-ray-emitting corona. Each band is a clue to a different temperature and scale around the black hole.
