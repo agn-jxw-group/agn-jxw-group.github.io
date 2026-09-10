@@ -9,8 +9,8 @@ portrait: /images/people/wang-jun-xian.png
 interests:
   - Active galactic nuclei
   - X-ray astronomy
-  - Multi-wavelength surveys
+  - High-redshift galaxies and cosmic reionization
 homepage: http://staff.ustc.edu.cn/~jxw/
 email: jxw@ustc.edu.cn
-bio: Jun-Xian has been working in the field for more than 30 years and expertises in Active Galactic Nuclei, high redshift galaxies, and cosmic reionization. He is also teaching the graduate course *Active Galactic Nuclei* at USTC.
+bio: Jun-Xian is a professor at USTC whose research focuses on active galactic nuclei, X-ray astronomy, high-redshift galaxies, and cosmic reionization. He earned his B.S. and Ph.D. from USTC, completed postdoctoral research at Johns Hopkins University, and returned to USTC as a professor in 2004. He also teaches the graduate course Active Galactic Nuclei.
 ---

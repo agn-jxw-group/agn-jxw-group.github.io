@@ -5,6 +5,7 @@ role: Principal Investigator
 group: leaders
 order: 3
 initials: TL
+portrait: /images/people/liu-teng.webp
 interests:
   - X-ray surveys
   - Active galaxies and transients
