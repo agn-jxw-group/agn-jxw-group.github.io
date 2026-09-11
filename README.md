@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/images/brand/watching-cosmic-lighthouses-logo-x-lockup.png" alt="USTC AGN & X-ray — Wang · Cai · Liu" width="760">
+</p>
+
 # Watching Cosmic Lighthouses
 
 [Watching Cosmic Lighthouses](https://agn-jxw-group.github.io/) is the public website of the USTC AGN & X-ray Astrophysics Group led by Jun-Xian Wang, Zhen-Yi Cai, and Teng Liu.

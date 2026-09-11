@@ -5,7 +5,13 @@ const isActive = (href: string) => href === '/' ? pathname === withBase('') : pa
 ---
 <header class="site-header">
   <a class="site-brand" href={withBase('')} aria-label={`${SITE.name} home`}>
-    <span class="brand-mark" aria-hidden="true"><span></span></span>
+    <img
+      class="brand-mark"
+      src={withBase('/images/brand/watching-cosmic-lighthouses-logo-x.png')}
+      alt=""
+      width="1254"
+      height="1254"
+    />
     <span><strong>{SITE.name}</strong><small>{SITE.descriptor}</small></span>
   </a>
   <nav class="desktop-nav" aria-label="Primary navigation">
